@@ -1,0 +1,33 @@
+{% extends "api/base.html" %}
+{% load static %}
+
+{% block main %}
+
+    <header class="masthead bg-dark text-white text-center" style="width:100%">
+        <div class="container d-flex align-items-center flex-column">
+            <h2 class="display-4">Leaderboard</h2>
+            <div class="divider-custom divider-light">
+                <div class="divider-custom-line"></div>
+            </div>
+            <table class="table table-striped table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">Position</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Level</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {% for student in students %}
+                  <tr>
+                    <th scope="row">{{student.position}}</th>
+                    <td>{{student.user.username}}</td>
+                    <td>{{student.current_level.level_number}}</td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+            </table>
+        </div>
+    </header>
+
+{% endblock %}

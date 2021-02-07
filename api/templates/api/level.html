@@ -1,0 +1,32 @@
+{% extends "api/base.html" %}
+{% load static %}
+
+{% block main %}
+<header class="masthead bg-dark text-white text-center">
+    <div class="container d-flex align-items-center flex-column">
+        <img class="masthead-avatar mb-5" src={% static "images/logo.png" %} alt="logo" style="width: 100px; height:auto">
+        <h2 class="display-7">Level {{level.level_number}}:
+        {% if level.question %}
+            <p class = 'lead'>{{level.question}}</p>
+        {% else %}
+            <a href="{{level.link}}" target='_blank'>Link to treasure</a>
+        {% endif %}
+        </h2>
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+        </div>
+
+        <form method="post" action="">
+            {% csrf_token %}
+          <div class="form-outline mb-4">
+            <input type="text" id="form1Example2" class="form-control" name="answer" placeholder="Answer"/>
+          </div>
+
+          <!-- Submit button -->
+          <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+
+    </div>
+</header>
+
+{% endblock %}

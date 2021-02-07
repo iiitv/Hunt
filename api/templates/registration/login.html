@@ -1,0 +1,65 @@
+{% load static %}
+<html lang="en" dir="ltr">
+<head>
+    <title>Capture The Flag</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes" />
+
+    <link rel="stylesheet" href={% static "css/login.css" %}>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link rel="stylesheet" href={% static "css/mdb.min.css" %}>
+    <link rel="stylesheet" href={% static "css/master.css" %}>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+
+	<canvas id="canvas" ></canvas>
+    <div class="container" >
+        <form action={% url 'login' %} method="post">
+            {% csrf_token %}
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center default-text py-3"><i class="fa fa-lock"></i> Login:</h3>
+                    <!--Body-->
+                    {% csrf_token %}
+				    {{form.username.label_tag}}
+    				<input class="form-styling" type="text" name="username" placeholder=""/>
+				    {{form.password.label_tag}}
+    				<input class="form-styling" type="password" name="password" placeholder=""/>
+                    <div class="text-center">
+                        <input type="submit" class="btn btn-default waves-effect waves-light" value="Login" style="background-color:rgba(16,89,255, 1)">
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+	<div class="container" style="position:absolute;left:0;top:0">
+	  {% comment %} <div class="frame">
+	  	<div class="nav">
+		  <ul class"links">
+			<li class="signin-active"><a class="btn">Sign in</a></li>
+		  </ul>
+		</div>
+		<div ng-app ng-init="checked = false">
+			<form class="form-signin" action={% url 'login' %} method="post" id="submit-this">
+                {% csrf_token %}
+				{{form.username.label_tag}}
+				<input class="form-styling" type="text" name="username" placeholder="username"/>
+				{{form.password.label_tag}}
+				<input class="form-styling" type="password" name="password" placeholder=""/>
+				<div class="btn-animate">
+				  <input type="submit" class="btn-signin" value="Login" style="background-color:rgba(16,89,255, 1)">
+				</div>
+		</div>
+	  </div>
+	</div> {% endcomment %}
+	<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script language="JavaScript" type="text/javascript" src={% static "js/login.js" %}></script>
+</body>

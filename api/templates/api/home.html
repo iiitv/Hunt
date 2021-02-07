@@ -1,0 +1,18 @@
+{% extends "api/base.html" %}
+{% load static %}
+
+{% block main %}
+    <header class="masthead bg-dark text-white text-center">
+        <div class="container d-flex align-items-center flex-column">
+            <img class="masthead-avatar mb-5" src={% static "images/logo.png" %} alt="logo" style="width: 170px; height:auto">
+            <h2 class="display-4">CTF Series IIITV</h2>
+            <div class="divider-custom divider-light">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <p class = 'lead'>Lets start hunting!</p>
+            <!-- Icon Divider-->
+
+        </div>
+    </header>
+{% endblock %}
