@@ -36,7 +36,7 @@ class LevelView(LoginRequiredMixin, TemplateView):
         student = Student.objects.get(user=request.user)
         level = student.current_level
         if request.POST['answer'] == level.answer:
-            if(datetime.now()<datetime(2021, 2, 8, 10, 20, 0, 0)):
+            if(datetime.now()<datetime(2021, 2, 20, 16, 0, 0, 0)):
                 student.score+=level.score
                 student.time_stamp = datetime.now()
             try:
