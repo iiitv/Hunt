@@ -45,9 +45,14 @@
                     <li class="nav-item">
                         <a class="nav-link " href={% url 'board' %}>Leaderboard</a>
                     </li>
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="return false;">Welcome {{request.user.first_name}}</a>
+                    </li>
+                    {% endif %}
                 </ul>
                 {% if request.user.is_authenticated %}
-                    <span class="navbar-text dark"><a href="{% url 'logout' %}">Logout</a></span>
+                    <span class="navbar-text dark"><a href="{% url 'logout' %}?next=/">Logout</a></span>
                 {% else %}
                     <span class="navbar-text dark"><a href="{% url 'login' %}">Login</a></span>
                 {% endif %}
