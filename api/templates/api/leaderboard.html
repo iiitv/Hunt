@@ -14,16 +14,18 @@
                 <tr>
                   <th scope="col">Position</th>
                   <th scope="col">Username</th>
-                  <th scope="col">Level</th>
+                  <th scope="col">Score</th>
                 </tr>
               </thead>
               <tbody>
                   {% for student in students %}
+                  {% if student.position != -1 %}
                   <tr>
                     <th scope="row">{{student.position}}</th>
                     <td>{{student.user.username}}</td>
-                    <td>{{student.current_level.level_number}}</td>
+                    <td>{{student.score}}</td>
                   </tr>
+                  {% endif %}
                   {% endfor %}
               </tbody>
             </table>

@@ -8,6 +8,8 @@ from django.http import HttpResponseRedirect
 from rest_framework.views import APIView
 from django.http import JsonResponse
 import json
+from datetime import datetime
+import pytz
 
 # Create your views here.
 
@@ -25,6 +27,7 @@ class LevelView(LoginRequiredMixin, TemplateView):
         student = Student.objects.get(user=self.request.user)
         level = student.current_level
         context['level'] = level
+        context['student'] = student
 
         return context
 
@@ -33,8 +36,13 @@ class LevelView(LoginRequiredMixin, TemplateView):
         student = Student.objects.get(user=request.user)
         level = student.current_level
         if request.POST['answer'] == level.answer:
-            student.score+=level.score
-            student.current_level = Level.objects.get(level_number = level.level_number+1)
+            if(datetime.now()<datetime(2021, 2, 8, 10, 20, 0, 0)):
+                student.score+=level.score
+                student.time_stamp = datetime.now()
+            try:
+                student.current_level = Level.objects.get(level_number = level.level_number+1)
+            except Level.DoesNotExist:
+                student.finish=1
             print(student.current_level)
             print(student.score)
             student.save()
@@ -48,7 +56,7 @@ class LeaderboardView(TemplateView):
     def get_context_data(self, **kwargs):
 
         context = super(LeaderboardView, self).get_context_data(**kwargs)
-        students = list(Student.objects.all().order_by('-score'))
+        students = list(Student.objects.all().order_by('-score', 'time_stamp'))
         for i in range(len(students)):
             students[i].position=i+1
 
@@ -85,7 +93,7 @@ class RegistrationAPI(APIView):
 
         user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name, email=email, password=password)
         user.save()
-        student = Student(user=user, roll_number=rollno, code=code, current_level=Level.objects.get(level_number=1))
+        student = Student(user=user, roll_number=rollno, code=otpcode, current_level=Level.objects.get(level_number=1))
         student.save()
         return JsonResponse(status=200, data={"message":"successfull"})
 

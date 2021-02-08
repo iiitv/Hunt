@@ -24,8 +24,9 @@ class Student(models.Model):
     roll_number = models.IntegerField(unique=True)
     code = models.CharField(max_length=100, null = True, blank=True)
     time_stamp = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-    position=models.IntegerField(null=True, blank=True)
+    position=models.IntegerField(null=True, blank=True, default=-1)
     score = models.IntegerField(default=0)
     current_level = models.ForeignKey(Level, on_delete=models.CASCADE)
+    finish = models.IntegerField(default=0)
     def __str__(self):
         return f"{self.user.username} {self.roll_number} {self.score}"
