@@ -22,7 +22,7 @@ class Student(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     roll_number = models.IntegerField(unique=True)
-    code = models.CharField(max_length=10, null = True, blank=True)
+    code = models.CharField(max_length=100, null = True, blank=True)
     time_stamp = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     position=models.IntegerField(null=True, blank=True)
     score = models.IntegerField(default=0)
