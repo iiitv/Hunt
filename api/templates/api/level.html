@@ -8,8 +8,9 @@
         {% if student.finish == 0 %}
             <h2 class="display-7">Level {{level.level_number}}:
             {% if level.question %}
-                <p class = 'lead'>{{level.question}}</p>
-            {% else %}
+                {{level.question|safe}}
+            {% endif %}
+            {% if level.link %}
                 <a href="{{level.link}}" target='_blank'>Link to treasure</a>
             {% endif %}
             </h2>
