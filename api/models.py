@@ -28,5 +28,6 @@ class Student(models.Model):
     score = models.IntegerField(default=0)
     current_level = models.ForeignKey(Level, on_delete=models.CASCADE)
     finish = models.IntegerField(default=0)
+    first_year = models.BooleanField(default=False)
     def __str__(self):
         return f"{self.user.username} {self.roll_number} {self.score}"

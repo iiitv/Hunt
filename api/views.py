@@ -36,13 +36,16 @@ class LevelView(LoginRequiredMixin, TemplateView):
         student = Student.objects.get(user=request.user)
         level = student.current_level
         if request.POST['answer'] == level.answer:
-            if(datetime.now()<datetime(2021, 2, 20, 16, 0, 0, 0)):
+            if(datetime.now()<datetime(2021, 2, 20, 18, 0, 0, 0) and not student.first_year):
+                student.score+=level.score
+                student.time_stamp = datetime.now()
+            elif datetime.now()<datetime(2021, 2, 21, 23, 59, 59, 0) and datetime.now()>=datetime(2021, 2, 20, 0, 0, 0, 0) and student.first_year:
                 student.score+=level.score
                 student.time_stamp = datetime.now()
             try:
                 student.current_level = Level.objects.get(level_number = level.level_number+1)
             except Level.DoesNotExist:
-                student.finish=1
+                student.finish=True
             print(student.current_level)
             print(student.score)
             student.save()
@@ -56,11 +59,15 @@ class LeaderboardView(TemplateView):
     def get_context_data(self, **kwargs):
 
         context = super(LeaderboardView, self).get_context_data(**kwargs)
-        students = list(Student.objects.all().order_by('-score', 'time_stamp'))
-        for i in range(len(students)):
-            students[i].position=i+1
+        seniors = list(Student.objects.filter(first_year=False).order_by('-score', 'time_stamp'))
+        juniors = list(Student.objects.filter(first_year=True).order_by('-score', 'time_stamp'))
+        for i in range(len(seniors)):
+            seniors[i].position=i+1
+        for i in range(len(juniors)):
+            juniors[i].position=i+1
 
-        context['students']=students
+        context['seniors']=seniors
+        context['juniors']=juniors
 
         return context
 
