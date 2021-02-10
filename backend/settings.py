@@ -29,7 +29,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True if config('DEBUG')=="True" else False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'iiitv-ctf.herokuapp.com', 'ctf-iiitv.tk','65.0.75.125']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'iiitv-ctf.herokuapp.com', 'ctf-iiitv.tk','52.66.247.55']
 
 
 # Application definition
