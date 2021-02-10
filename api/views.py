@@ -93,6 +93,8 @@ class RegistrationAPI(APIView):
         email = data['email']
         username = data['username']
         password = data['password']
+        fy = data['fy']
+        fy = fy==1
 
         c = code(username)
         if c!=otpcode:
@@ -100,7 +102,7 @@ class RegistrationAPI(APIView):
 
         user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name, email=email, password=password)
         user.save()
-        student = Student(user=user, roll_number=rollno, code=otpcode, current_level=Level.objects.get(level_number=1))
+        student = Student(user=user, roll_number=rollno, code=otpcode, current_level=Level.objects.get(level_number=1), first_year=fy)
         student.save()
         return JsonResponse(status=200, data={"message":"successfull"})
 
