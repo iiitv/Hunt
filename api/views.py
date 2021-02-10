@@ -45,7 +45,7 @@ class LevelView(LoginRequiredMixin, TemplateView):
             try:
                 student.current_level = Level.objects.get(level_number = level.level_number+1)
             except Level.DoesNotExist:
-                student.finish=True
+                student.finish=1
             print(student.current_level)
             print(student.score)
             student.save()
