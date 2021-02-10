@@ -5,10 +5,11 @@
 <header class="masthead bg-dark text-white text-center">
     <div class="container d-flex align-items-center flex-column">
         <img class="masthead-avatar mb-5" src={% static "images/logo.png" %} alt="logo" style="width: 100px; height:auto">
-        <h2 class="display-7">Level {{level.level_number}}:
+        <h2 class="display-7">Level {{level.level_number}}:<br>
         {% if level.question %}
-            <p class = 'lead'>{{level.question}}</p>
-        {% else %}
+            {{level.question|safe}}
+        {% endif %}
+        {% if level.link %}
             <a href="{{level.link}}" target='_blank'>Link to treasure</a>
         {% endif %}
         </h2>
