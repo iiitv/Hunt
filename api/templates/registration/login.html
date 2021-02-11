@@ -30,7 +30,7 @@
                     {% csrf_token %}
 				    {{form.username.label_tag}}
     				<input class="form-styling" type="text" name="username" placeholder=""/>
-				    {{form.password.label_tag}}
+				    {{form.password.label_tag}} (Use the password used while registering) 
     				<input class="form-styling" type="password" name="password" placeholder=""/>
                     <div class="text-center">
                         <input type="submit" class="btn btn-default waves-effect waves-light" value="Login" style="background-color:rgba(16,89,255, 1)">

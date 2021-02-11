@@ -6,12 +6,19 @@ from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from rest_framework.views import APIView
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 import json
 from datetime import datetime
 import pytz
+from django.core import serializers
 
 # Create your views here.
+def get_posts(request):
+
+    results = Post.objects.all()
+    jsondata = serializers.serialize('json', results)
+    return HttpResponse(jsondata)
+
 
 class HomeView(TemplateView):
 
@@ -35,7 +42,7 @@ class LevelView(LoginRequiredMixin, TemplateView):
 
         student = Student.objects.get(user=request.user)
         level = student.current_level
-        if request.POST['answer'] == level.answer:
+        if request.POST['answer'].casefold() == level.answer.casefold():
             if(datetime.now()<datetime(2021, 2, 20, 18, 0, 0, 0) and not student.first_year):
                 student.score+=level.score
                 student.time_stamp = datetime.now()

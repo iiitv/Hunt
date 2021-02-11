@@ -31,3 +31,13 @@ class Student(models.Model):
     first_year = models.BooleanField(default=False)
     def __str__(self):
         return f"{self.user.username} {self.roll_number} {self.score}"
+
+class Post(models.Model):
+
+    author=models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
+    text = models.TextField()
+
+    def __str__(self):
+        return self.title
+
