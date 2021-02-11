@@ -13,10 +13,14 @@ class Level(models.Model):
     link = models.URLField(blank=True, null=True)
     score = models.IntegerField()
     timestamp = models.DateTimeField(auto_now_add=True)
+    decay = models.FloatField(null=True, default=0.05)
 
     def __str__(self):
-
         return f"{self.level_id} {self.level_number}"
+
+    def score_decay(self):
+        self.score = score*(1-decay)
+        self.save()
 
 class Student(models.Model):
 
