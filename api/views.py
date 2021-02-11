@@ -39,7 +39,9 @@ class LevelView(LoginRequiredMixin, TemplateView):
             if(datetime.now()<datetime(2021, 2, 20, 18, 0, 0, 0) and not student.first_year):
                 student.score+=level.score
                 student.time_stamp = datetime.now()
-            elif datetime.now()<datetime(2021, 2, 21, 23, 59, 59, 0) and datetime.now()>=datetime(2021, 2, 20, 0, 0, 0, 0) and student.first_year:
+#datetime.now()<datetime(2021, 2, 21, 23, 59, 59, 0)
+#datetime.now()>=datetime(2021, 2, 20, 0, 0, 0, 0)
+            elif datetime.now()<datetime(2021, 2, 21, 23, 59, 59, 0) and student.first_year:
                 student.score+=level.score
                 student.time_stamp = datetime.now()
             try:
