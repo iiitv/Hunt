@@ -19,8 +19,9 @@ class Level(models.Model):
         return f"{self.level_id} {self.level_number}"
 
     def score_decay(self):
-        self.score = score*(1-decay)
+        self.score = self.score*(1-self.decay)
         self.save()
+        print(self, self.score)
 
 class Student(models.Model):
 
@@ -44,4 +45,3 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
-

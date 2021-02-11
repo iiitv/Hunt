@@ -3,6 +3,9 @@
 
 {% block main %}
 <header class="masthead bg-dark text-white text-center" style="min-height:83.5vh">
+    <div class="container", style="top:0;left:75%">
+        Score for level: {{level.score}}
+    </div>
     <div class="container d-flex align-items-center flex-column">
         <img class="masthead-avatar mb-5" src={% static "images/logo.png" %} alt="logo" style="width: 100px; height:auto">
         {% if student.finish == 0 %}
