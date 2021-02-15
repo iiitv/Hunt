@@ -8,5 +8,6 @@ urlpatterns = [
     path('level', LevelView.as_view(), name="level"),
     path('board', LeaderboardView.as_view(), name="board"),
     path('reg', RegistrationAPI.as_view(), name='reg'),
+    path('rules', RulesView.as_view(), name='rules'),
     path('getposts', get_posts, name="posts"),
 ]

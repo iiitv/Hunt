@@ -1,0 +1,43 @@
+{% extends 'api/base.html' %}
+{% load static %}
+
+{% block main %}
+    <header class="masthead bg-dark text-white" style="min-height:83vh;">
+        <div class="container d-flex align-items-center flex-column">
+            <h2 class="display-4">Rules</h2>
+            <div class="divider-custom divider-light">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <ol>
+                <li class="lead">
+                    This event is a single player event, participants are not allowed to team up. If found, will be disqualified immediately
+                </li>
+                <li class="lead">
+                    Every level has a score, which decays by 3% every hour. For eg, if it was 100, then it will be 97 the next hour.
+                </li>
+                <li class="lead">
+                    The event lasts for 30 hours for the first year, and 24 hours for the 2nd and 3rd year.
+                </li>
+                <li class="lead">
+                    Teaming-up will only help one person win, there are no ties in this game.
+                </li>
+                <li class="lead">
+                    The players highest score at the end will be rewarded, as mentioned in the emails
+                </li>
+                <li class="lead">
+                    Seniors should not participate in the event for first year unless they wish to face public humiliation. We have records for everything.
+                </li>
+                <li class="lead">
+                    Once the contest ends, you may continue to participate, but the leaderboard will stay frozen.
+                </li>
+                <li class="lead">
+                    You are solely responsible for network issues from your end. In case we have server issues, we will take necessary steps to ensure you get ample time for the event.
+                </li>
+                <li class="lead">
+                    Join the <a href="https://discord.gg/yYDf26b3Zw" target="_blank" style="text-decoration:none">discord server</a> for hints, giveaways and more.
+                </li>
+            </ol>
+        </div>
+    </header>
+{% endblock %}

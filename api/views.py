@@ -24,6 +24,10 @@ class HomeView(TemplateView):
 
     template_name = 'api/home.html'
 
+class RulesView(TemplateView):
+
+    template_name = 'api/rules.html'
+
 class LevelView(LoginRequiredMixin, TemplateView):
 
     template_name = 'api/level.html'

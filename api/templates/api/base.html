@@ -45,6 +45,9 @@
                     <li class="nav-item">
                         <a class="nav-link " href={% url 'board' %}>Leaderboard</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href={% url 'rules' %}>Rules</a>
+                    </li>
                     {% if request.user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="#" onclick="return false;">Welcome {{request.user.first_name}}</a>
@@ -66,7 +69,7 @@
         </main>
         <footer class="bg-light text-center text-lg-start">
           <div class="text-center p-3" style="background-color: rgba(0, 0, 255, 0.2)">
-            <a class="text-dark" href="https://makingcomputerssmart.com/">Tanmay</a>, Pushkar & Harsh 
+            <a class="text-dark" href="https://makingcomputerssmart.com/" target="_blank">Tanmay</a>, <a class="text-dark" href="https://www.linkedin.com/in/thepushkarp/" target="_blank">Pushkar</a> & <a class="text-dark" target="_blank" href="https://www.linkedin.com/in/harsh-kakani-3127a916a/">Harsh</a>
           </div>
         </footer>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
