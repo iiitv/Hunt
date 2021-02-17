@@ -7,7 +7,6 @@
         Score for level: {{level.score}}
     </div>
     <div class="container d-flex align-items-center flex-column">
-        <img class="masthead-avatar mb-5" src={% static "images/logo.png" %} alt="logo" style="width: 100px; height:auto">
         {% if student.finish == 0 %}
             <h2 class="display-7">Level {{level.level_number}}:<br></h2>
             {% if level.question %}
