@@ -3,6 +3,11 @@
 
 {% block main %}
 <header class="masthead bg-dark text-white text-center" style="min-height:83.5vh">
+    {% if banned %}
+    <div class="container d-flex align-items-center flex-column">
+        <h2 class="display-7">Banned!</h2>
+    </div>
+    {% else %}
     <div class="container", style="top:0;left:75%">
         Score for level: {{level.score}}
     </div>
@@ -43,6 +48,8 @@
         {% endif %}
 
     </div>
+    {% endif %}
+
 </header>
 
 {% endblock %}

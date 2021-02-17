@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 
@@ -34,6 +33,10 @@ class Student(models.Model):
     current_level = models.ForeignKey(Level, on_delete=models.CASCADE)
     finish = models.IntegerField(default=0)
     first_year = models.BooleanField(default=False)
+
+    attempts = models.IntegerField(default=0)
+    attempt_time_stamp = models.DateTimeField(null=True, blank=True)
+
     def __str__(self):
         return f"{self.user.username} {self.roll_number} {self.score}"
 

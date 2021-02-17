@@ -6,11 +6,12 @@ from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from rest_framework.views import APIView
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest
 import json
 from datetime import datetime
 import pytz
 from django.core import serializers
+from django.utils import timezone
 
 # Create your views here.
 def get_posts(request):
@@ -39,14 +40,22 @@ class LevelView(LoginRequiredMixin, TemplateView):
         level = student.current_level
         context['level'] = level
         context['student'] = student
-
+        if student.attempt_time_stamp is not None:
+            diff = timezone.now() - student.attempt_time_stamp
+            if student.attempts>10 and diff.seconds<60:
+                context['banned']=1
+            elif student.attempts>10 and diff.seconds>60:
+                student.attempts = 0
+                student.save()
         return context
 
     def post(self, request):
 
         student = Student.objects.get(user=request.user)
         level = student.current_level
+
         if request.POST['answer'].casefold() == level.answer.casefold():
+
             if(datetime.now()<datetime(2021, 2, 20, 18, 0, 0, 0) and not student.first_year):
                 student.score+=level.score
                 student.time_stamp = datetime.now()
@@ -62,6 +71,23 @@ class LevelView(LoginRequiredMixin, TemplateView):
             print(student.current_level)
             print(student.score)
             student.save()
+
+        else:
+            if student.attempt_time_stamp is not None:
+                diff = timezone.now() - student.attempt_time_stamp
+                print(diff)
+                if diff.seconds<60:
+                    student.attempts+=1
+                    print(student.attempts)
+                else:
+                    student.attempt_time_stamp = timezone.now()
+                    student.attempts=0
+                student.save()
+            else:
+                student.attempt_time_stamp = timezone.now()
+                student.attempts=0
+
+                student.save()
 
         return HttpResponseRedirect("/level")
 
