@@ -75,10 +75,8 @@ class LevelView(LoginRequiredMixin, TemplateView):
         else:
             if student.attempt_time_stamp is not None:
                 diff = timezone.now() - student.attempt_time_stamp
-                print(diff)
                 if diff.seconds<60:
                     student.attempts+=1
-                    print(student.attempts)
                 else:
                     student.attempt_time_stamp = timezone.now()
                     student.attempts=0
