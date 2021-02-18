@@ -36,6 +36,7 @@ class Student(models.Model):
 
     attempts = models.IntegerField(default=0)
     attempt_time_stamp = models.DateTimeField(null=True, blank=True)
+    banned = models.IntegerField(default=1)
 
     def __str__(self):
         return f"{self.user.username} {self.roll_number} {self.score}"

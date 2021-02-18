@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect
 from rest_framework.views import APIView
 from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 import pytz
 from django.core import serializers
 from django.utils import timezone
@@ -42,9 +42,10 @@ class LevelView(LoginRequiredMixin, TemplateView):
         context['student'] = student
         if student.attempt_time_stamp is not None:
             diff = timezone.now() - student.attempt_time_stamp
-            if student.attempts>7 and diff.seconds<60:
+            seconds = diff.seconds + diff.days*86400
+            if student.attempts>7 and seconds<60:
                 context['banned']=1
-            elif student.attempts>7 and diff.seconds>60:
+            elif student.attempts>7 and seconds>60:
                 student.attempts = 0
                 student.save()
         return context
@@ -75,21 +76,22 @@ class LevelView(LoginRequiredMixin, TemplateView):
         else:
             if student.attempt_time_stamp is not None:
                 diff = timezone.now() - student.attempt_time_stamp
-                if diff.seconds<60:
+                seconds = diff.seconds + diff.days*86400
+                if seconds<60:
                     student.attempts+=1
-                #if student.attempts > 10:
-                    #student.attempt_time_stamp = timezone.now()
+
                 else:
                     student.attempt_time_stamp = timezone.now()
-                    student.attempts=0
-                
+                    student.attempts=1
+
                 if student.attempts > 7:
-                    student.attempt_time_stamp = timezone.now()
+                    student.attempt_time_stamp = timezone.now() + timedelta(seconds=60*student.banned)
+                    student.banned+=1
 
                 student.save()
             else:
                 student.attempt_time_stamp = timezone.now()
-                student.attempts=0
+                student.attempts=1
 
                 student.save()
 

@@ -6,6 +6,10 @@
     {% if banned %}
     <div class="container d-flex align-items-center flex-column">
         <h2 class="display-1">Cooldown bro!</h2>
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+        </div>
+        <p class="lead">Refresh this page after {{student.banned}} minute(s). Use this time to actually solve the problem instead of spamming.</p>
     </div>
     {% else %}
     <div class="container", style="top:0;left:75%">
