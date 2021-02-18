@@ -42,9 +42,9 @@ class LevelView(LoginRequiredMixin, TemplateView):
         context['student'] = student
         if student.attempt_time_stamp is not None:
             diff = timezone.now() - student.attempt_time_stamp
-            if student.attempts>10 and diff.seconds<60:
+            if student.attempts>7 and diff.seconds<60:
                 context['banned']=1
-            elif student.attempts>10 and diff.seconds>60:
+            elif student.attempts>7 and diff.seconds>60:
                 student.attempts = 0
                 student.save()
         return context
@@ -77,9 +77,15 @@ class LevelView(LoginRequiredMixin, TemplateView):
                 diff = timezone.now() - student.attempt_time_stamp
                 if diff.seconds<60:
                     student.attempts+=1
+                #if student.attempts > 10:
+                    #student.attempt_time_stamp = timezone.now()
                 else:
                     student.attempt_time_stamp = timezone.now()
                     student.attempts=0
+                
+                if student.attempts > 7:
+                    student.attempt_time_stamp = timezone.now()
+
                 student.save()
             else:
                 student.attempt_time_stamp = timezone.now()
