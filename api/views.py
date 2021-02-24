@@ -62,7 +62,7 @@ class LevelView(LoginRequiredMixin, TemplateView):
                 student.time_stamp = datetime.now()
 #datetime.now()<datetime(2021, 2, 21, 23, 59, 59, 0)
 #datetime.now()>=datetime(2021, 2, 20, 0, 0, 0, 0)
-            elif datetime.now()<datetime(2021, 2, 21, 23, 59, 59, 0) and student.first_year:
+            elif datetime.now()<datetime(2021, 2, 21, 12, 0, 0, 0) and student.first_year:
                 student.score+=level.score
                 student.time_stamp = datetime.now()
             try:

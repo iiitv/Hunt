@@ -22,6 +22,7 @@
                           <th scope="col">Position</th>
                           <th scope="col">Username</th>
                           <th scope="col">Score</th>
+                          <th scope="col">Level</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -31,6 +32,7 @@
                             <th scope="row">{{student.position}}</th>
                             <td>{{student.user.username}}</td>
                             <td>{{student.score}}</td>
+                            <td>{{student.current_level.level_number}}</td>
                           </tr>
                           {% endif %}
                           {% endfor %}
@@ -45,6 +47,7 @@
                           <th scope="col">Position</th>
                           <th scope="col">Username</th>
                           <th scope="col">Score</th>
+			  <th scope="col">Level</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -54,6 +57,7 @@
                             <th scope="row">{{student.position}}</th>
                             <td>{{student.user.username}}</td>
                             <td>{{student.score}}</td>
+	                    <td>{{student.current_level.level_number}}</td>
                           </tr>
                           {% endif %}
                           {% endfor %}
